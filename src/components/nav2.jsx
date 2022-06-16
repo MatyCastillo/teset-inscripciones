@@ -98,7 +98,9 @@ const Drawer = styled(MuiDrawer, {
 const isMobile = window.innerWidth <= 500;
 
 export default function NavBar({ children }) {
-  const [openSideBar, setOpenSideBar] = React.useState(true);
+  const [openSideBar, setOpenSideBar] = React.useState(
+    !isMobile ? true : false
+  );
   const [openModal, setOpenModal] = React.useState(true);
 
   const handleClickOpenModal = () => {
