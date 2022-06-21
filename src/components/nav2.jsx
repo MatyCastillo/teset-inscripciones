@@ -97,11 +97,11 @@ const Drawer = styled(MuiDrawer, {
 
 const isMobile = window.innerWidth <= 500;
 
-export default function NavBar({ children }) {
+export default function NavBar(props) {
   const [openSideBar, setOpenSideBar] = React.useState(
     !isMobile ? true : false
   );
-  const [openModal, setOpenModal] = React.useState(true);
+  const [openModal, setOpenModal] = React.useState(props.form ? true : false);
 
   const handleClickOpenModal = () => {
     setOpenModal(true);
@@ -246,7 +246,7 @@ export default function NavBar({ children }) {
           </List>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          {children}
+          {props.children}
         </Box>
       </Box>
     </ThemeProvider>

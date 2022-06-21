@@ -30,13 +30,20 @@ export default function IncriptionForm() {
   const [datePickerValue, setDatePickerValue] = React.useState(null);
   const [timePickerValue, setTimePickerValue] = React.useState(null);
 
+  const [data, setData] = React.useState({ date: datePickerValue });
+
+  const handleInputChange = (event) => {
+    // console.log(event.target.name)
+    // console.log(event.target.value)
+    setData({
+      ...data,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    console.log(data);
   };
 
   return (
@@ -69,6 +76,7 @@ export default function IncriptionForm() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  onChange={handleInputChange}
                   required
                   fullWidth
                   id="schoolName"
@@ -79,16 +87,18 @@ export default function IncriptionForm() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={handleInputChange}
                   required
                   fullWidth
-                  id="adress"
+                  id="address"
                   label="Dirección del colegio"
-                  name="adress"
+                  name="address"
                   autoComplete="street-address"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={handleInputChange}
                   required
                   fullWidth
                   id="location"
@@ -99,6 +109,7 @@ export default function IncriptionForm() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={handleInputChange}
                   required
                   fullWidth
                   id="email"
@@ -109,6 +120,7 @@ export default function IncriptionForm() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={handleInputChange}
                   required
                   fullWidth
                   id="phone"
@@ -119,6 +131,7 @@ export default function IncriptionForm() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={handleInputChange}
                   name="directorName"
                   required
                   fullWidth
@@ -129,6 +142,7 @@ export default function IncriptionForm() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={handleInputChange}
                   required
                   fullWidth
                   id="directorSurname"
@@ -152,6 +166,7 @@ export default function IncriptionForm() {
               </Typography>
               <Grid item xs={12}>
                 <TextField
+                  onChange={handleInputChange}
                   required
                   fullWidth
                   id="driverName"
@@ -174,6 +189,7 @@ export default function IncriptionForm() {
               </Typography>
               <Grid item xs={12}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  {console.log(datePickerValue)}
                   <Stack spacing={3}>
                     <DatePicker
                       label="Fecha de salida"
@@ -197,6 +213,7 @@ export default function IncriptionForm() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               endIcon={<SendIcon />}
+              onClick={handleSubmit}
             >
               Enviar formulario
             </Button>

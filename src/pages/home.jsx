@@ -4,14 +4,12 @@ import Nav2 from "../components/nav2";
 import Table from "../components/table";
 import IncriptionForm from "../components/inscriptionForm";
 
-const home = () => {
+const home = (prop) => {
   return (
     <>
-      {/* <NabBar /> */}
-      <Nav2>
-        <Table />
-      </Nav2>
-      {/* <IncriptionForm /> */}
+      <NabBar />
+      {/* <Nav2 form={prop.form}></Nav2> */}
+      <Table sx={{ m: 2 }} />
     </>
   );
 };

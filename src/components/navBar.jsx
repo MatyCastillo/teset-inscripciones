@@ -39,17 +39,8 @@ export default function ButtonAppBar() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Formulario de Transportistas
+              Escuelas Inscriptas
             </Typography>
             <Button
               variant="contained"
@@ -57,11 +48,11 @@ export default function ButtonAppBar() {
               onClick={handleClickOpen}
               startIcon={<AddIcon />}
             >
-              {!isMobile ? `Cargar nueva inscripción` : `Cargar`}
+              {!isMobile ? `Cargar inscripción` : `Cargar`}
             </Button>
             <Dialog open={open} onClose={handleClose} scroll="body">
               <DialogTitle id="scroll-dialog-title">
-                Formulario de Transportistas
+                Formulario Incripción
               </DialogTitle>
               <DialogContent>
                 <IconButton
@@ -76,7 +67,6 @@ export default function ButtonAppBar() {
                 >
                   <CloseIcon />
                 </IconButton>
-
                 <IncriptionForm />
               </DialogContent>
             </Dialog>
