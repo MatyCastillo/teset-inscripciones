@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,6 +17,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import SendIcon from "@mui/icons-material/Send";
+import esLocale from "date-fns/locale/es";
+import format from "date-fns/format";
 
 const theme = createTheme({
   palette: {
@@ -27,14 +30,26 @@ const theme = createTheme({
 });
 
 export default function IncriptionForm() {
-  const [datePickerValue, setDatePickerValue] = React.useState(null);
-  const [timePickerValue, setTimePickerValue] = React.useState(null);
+  const dataPre = {
+    nombreTransportista: null,
+    nombreColegio: null,
+    direccColegio: null,
+    localidadColegio: null,
+    emailColegio: null,
+    telColegio: null,
+    nombreDirectivo: null,
+    apellidoDirectivo: null,
+    dateViaje: null,
+    timeViaje: null,
+  };
 
-  const [data, setData] = React.useState({ date: datePickerValue });
+  const [datePickerValue, setDatePickerValue] = useState(null);
+  const [timePickerValue, setTimePickerValue] = useState(null);
+  const [nameFocuses, setNameFocuses] = useState(false);
+
+  const [data, setData] = useState(dataPre);
 
   const handleInputChange = (event) => {
-    // console.log(event.target.name)
-    // console.log(event.target.value)
     setData({
       ...data,
       [event.target.name]: event.target.value,
@@ -43,7 +58,28 @@ export default function IncriptionForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(data);
+
+    if (data.nombreColegio == null) {
+      setNameFocuses(true);
+    } else {
+      console.log(data);
+    }
+  };
+
+  const dateOnChange = (newValue) => {
+    setDatePickerValue(newValue);
+    setData({
+      ...data,
+      dateViaje: format(newValue, "dd-MM-yyyy"),
+    });
+  };
+
+  const timeOnChange = (newValue) => {
+    setTimePickerValue(newValue);
+    setData({
+      ...data,
+      timeViaje: format(newValue, "HH:mm"),
+    });
   };
 
   return (
@@ -78,10 +114,12 @@ export default function IncriptionForm() {
                 <TextField
                   onChange={handleInputChange}
                   required
+                  focused={nameFocuses}
+                  error={nameFocuses}
                   fullWidth
-                  id="schoolName"
+                  id="nombreColegio"
                   label="Nombre del colegio"
-                  name="schoolName"
+                  name="nombreColegio"
                   autoFocus
                 />
               </Grid>
@@ -90,9 +128,9 @@ export default function IncriptionForm() {
                   onChange={handleInputChange}
                   required
                   fullWidth
-                  id="address"
+                  id="direccColegio"
                   label="Dirección del colegio"
-                  name="address"
+                  name="direccColegio"
                   autoComplete="street-address"
                 />
               </Grid>
@@ -101,9 +139,9 @@ export default function IncriptionForm() {
                   onChange={handleInputChange}
                   required
                   fullWidth
-                  id="location"
+                  id="localidadColegio"
                   label="Localidad"
-                  name="location"
+                  name="localidadColegio"
                   autoComplete="address-level1"
                 />
               </Grid>
@@ -112,9 +150,9 @@ export default function IncriptionForm() {
                   onChange={handleInputChange}
                   required
                   fullWidth
-                  id="email"
+                  id="emailColegio"
                   label="Email del colegio"
-                  name="email"
+                  name="emailColegio"
                   autoComplete="email"
                 />
               </Grid>
@@ -123,19 +161,19 @@ export default function IncriptionForm() {
                   onChange={handleInputChange}
                   required
                   fullWidth
-                  id="phone"
+                  id="telColegio"
                   label="Teléfono del colegio"
-                  name="phone"
+                  name="telColegio"
                   autoComplete="tel"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   onChange={handleInputChange}
-                  name="directorName"
+                  name="nombreDirectivo"
                   required
                   fullWidth
-                  id="directorName"
+                  id="nombreDirectivo"
                   label="Nombre Directivo"
                   autoComplete="given-name"
                 />
@@ -145,9 +183,9 @@ export default function IncriptionForm() {
                   onChange={handleInputChange}
                   required
                   fullWidth
-                  id="directorSurname"
+                  id="apellidoDirectivo"
                   label="Apellido Directivo"
-                  name="directorSurname"
+                  name="apellidoDirectivo"
                   autoComplete="family-name"
                 />
               </Grid>
@@ -169,9 +207,9 @@ export default function IncriptionForm() {
                   onChange={handleInputChange}
                   required
                   fullWidth
-                  id="driverName"
+                  id="nombreTransportista"
                   label="Nombre y Apellido del transportista"
-                  name="driverName"
+                  name="nombreTransportista"
                 />
               </Grid>
               <Typography
@@ -188,19 +226,26 @@ export default function IncriptionForm() {
                 Ingrese los datos del viaje
               </Typography>
               <Grid item xs={12}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  {console.log(datePickerValue)}
+                <LocalizationProvider
+                  dateAdapter={AdapterDateFns}
+                  adapterLocale={esLocale}
+                >
                   <Stack spacing={3}>
                     <DatePicker
                       label="Fecha de salida"
                       value={datePickerValue}
-                      onChange={(newValue) => setDatePickerValue(newValue)}
+                      onSubmit={handleInputChange}
+                      inputFormat="dd/MM/yyyy"
+                      onChange={(newValue) => dateOnChange(newValue)}
                       renderInput={(params) => <TextField {...params} />}
                     />
                     <TimePicker
+                      inputFormat="HH:mm"
+                      ampm={false}
+                      name="time"
                       label="Hora de salida"
                       value={timePickerValue}
-                      onChange={(newValue) => setTimePickerValue(newValue)}
+                      onChange={(newValue) => timeOnChange(newValue)}
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </Stack>
