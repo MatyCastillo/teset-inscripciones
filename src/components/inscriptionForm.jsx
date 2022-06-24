@@ -45,6 +45,7 @@ export default function IncriptionForm() {
 
   const [datePickerValue, setDatePickerValue] = useState(null);
   const [timePickerValue, setTimePickerValue] = useState(null);
+  const [helper, setHelper] = useState("");
   const [nameFocuses, setNameFocuses] = useState(false);
 
   const [data, setData] = useState(dataPre);
@@ -61,6 +62,7 @@ export default function IncriptionForm() {
 
     if (data.nombreColegio == null) {
       setNameFocuses(true);
+      setHelper("Campo incompleto");
     } else {
       console.log(data);
     }
@@ -116,6 +118,7 @@ export default function IncriptionForm() {
                   required
                   focused={nameFocuses}
                   error={nameFocuses}
+                  helperText={helper}
                   fullWidth
                   id="nombreColegio"
                   label="Nombre del colegio"
