@@ -2,7 +2,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Paper } from "@mui/material";
-import { getAllIncriptions } from "../functions/functions";
+import { getAllIncriptions } from "../functions";
 
 const columns = [
   { field: "id", headerName: "#", width: 50 },
@@ -50,13 +50,13 @@ export default function DataTable() {
   }, []);
 
   return (
-    <Paper elevation={3} sx={{ m: 2 }} style={{ height: 400 }}>
+    <Paper elevation={3} sx={{ m: 2 }} style={{ height: 750 }}>
       <DataGrid
         rows={rows}
         loading={loading}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={25}
+        rowsPerPageOptions={[25]}
       />
     </Paper>
   );

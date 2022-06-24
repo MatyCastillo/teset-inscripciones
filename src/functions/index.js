@@ -13,10 +13,10 @@ const createNewInscription = async (data) => {
       "http://localhost:8080/api/v1/inscriptions/",
       data
     );
-    return "ok";
+    return resp;
   } catch (err) {
     // Handle Error Here
-    return "error" + err;
+    return err;
   }
 };
 

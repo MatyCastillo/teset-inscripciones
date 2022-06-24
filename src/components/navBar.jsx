@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from "@mui/icons-material/Add";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepOrange } from "@mui/material/colors";
@@ -21,10 +20,10 @@ const theme = createTheme({
     },
   },
 });
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
   const isMobile = window.innerWidth <= 500;
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(props.form ? true : false);
 
   const handleClickOpen = () => {
     setOpen(true);
