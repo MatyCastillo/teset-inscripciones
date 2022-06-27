@@ -335,13 +335,6 @@ export default function IncriptionForm() {
             >
               Enviar formulario
             </Button>
-            {/* <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Esto es para crear cuenta, se podría usar
-                </Link>
-              </Grid>
-            </Grid> */}
           </Box>
         </Box>
       </Container>
