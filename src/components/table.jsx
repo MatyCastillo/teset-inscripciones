@@ -1,8 +1,24 @@
 import * as React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, esES } from "@mui/x-data-grid";
 import { Paper } from "@mui/material";
 import { getAllIncriptions } from "../functions";
+import { deepOrange } from "@mui/material/colors";
+import { esES as coreEsES } from "@mui/material/locale";
+
+const theme = createTheme(
+  {
+    palette: {
+      primary: deepOrange,
+      secondary: {
+        main: "#bf360c",
+      },
+    },
+  },
+  esES, // x-data-grid translations
+  coreEsES // core translations
+);
 
 const columns = [
   { field: "id", headerName: "#", width: 50 },
@@ -51,13 +67,26 @@ export default function DataTable() {
 
   return (
     <Paper elevation={3} sx={{ m: 2 }} style={{ height: 750 }}>
-      <DataGrid
-        rows={rows}
-        loading={loading}
-        columns={columns}
-        pageSize={25}
-        rowsPerPageOptions={[25]}
-      />
+      <ThemeProvider theme={theme}>
+        <DataGrid
+          initialState={{
+            columns: {
+              columnVisibilityModel: {
+                // Hide columns status and traderName, the other columns will remain visible
+                id: false,
+              },
+            },
+            sorting: {
+              sortModel: [{ field: "id", sort: "desc" }],
+            },
+          }}
+          rows={rows}
+          loading={loading}
+          columns={columns}
+          pageSize={25}
+          rowsPerPageOptions={[25]}
+        />
+      </ThemeProvider>
     </Paper>
   );
 }
