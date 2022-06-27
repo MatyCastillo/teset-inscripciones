@@ -110,13 +110,19 @@ export default function IncriptionForm() {
     } else if (data.timeViaje == null || "") {
       setTimeFocus(true);
     } else {
-      const res = await createNewInscription(data);
-      if (res.data.status === "success") {
-        setContentDialog("success");
-        handleOpenDialog();
-        setTimeout(handleCloseDialog, 1000);
-        setTimeout(reload, 1000);
-      } else {
+      try {
+        const res = await createNewInscription(data);
+        if (res.data.status === "success") {
+          setContentDialog("success");
+          handleOpenDialog();
+          setTimeout(handleCloseDialog, 1000);
+          setTimeout(reload, 1000);
+        } else {
+          setContentDialog("error");
+          handleOpenDialog();
+          setTimeout(handleCloseDialog, 2000);
+        }
+      } catch {
         setContentDialog("error");
         handleOpenDialog();
         setTimeout(handleCloseDialog, 2000);
