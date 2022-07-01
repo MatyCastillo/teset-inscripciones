@@ -6,6 +6,7 @@ import { Paper } from "@mui/material";
 import { getAllIncriptions } from "../functions";
 import { deepOrange } from "@mui/material/colors";
 import { esES as coreEsES } from "@mui/material/locale";
+import tableImage from "../img/table-background.png";
 
 const theme = createTheme(
   {
@@ -69,6 +70,11 @@ export default function DataTable() {
     <Paper elevation={3} sx={{ m: 2 }} style={{ height: 750 }}>
       <ThemeProvider theme={theme}>
         <DataGrid
+          sx={{
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundImage: `url(${tableImage})`,
+          }}
           initialState={{
             columns: {
               columnVisibilityModel: {
