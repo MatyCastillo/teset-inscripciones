@@ -8,9 +8,10 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { deepOrange } from "@mui/material/colors";
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import { Avatar, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import IncriptionForm from "./inscriptionForm";
 import CloseIcon from "@mui/icons-material/Close";
+import Logo from "../img/logo-2.png";
 
 const theme = createTheme({
   palette: {
@@ -38,6 +39,8 @@ export default function ButtonAppBar(props) {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
+            <Avatar sx={{ px: 2 }} alt="Logo" src={Logo} />
+
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Escuelas Inscriptas
             </Typography>
