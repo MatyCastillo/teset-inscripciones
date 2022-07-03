@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/teset-inscripciones/static/css/main.e6c13ad2.css",
-    "main.js": "/teset-inscripciones/static/js/main.0173a09b.js",
+    "main.js": "/teset-inscripciones/static/js/main.4b3c1ebe.js",
     "static/js/787.29c8708a.chunk.js": "/teset-inscripciones/static/js/787.29c8708a.chunk.js",
     "index.html": "/teset-inscripciones/index.html",
     "main.e6c13ad2.css.map": "/teset-inscripciones/static/css/main.e6c13ad2.css.map",
-    "main.0173a09b.js.map": "/teset-inscripciones/static/js/main.0173a09b.js.map",
+    "main.4b3c1ebe.js.map": "/teset-inscripciones/static/js/main.4b3c1ebe.js.map",
     "787.29c8708a.chunk.js.map": "/teset-inscripciones/static/js/787.29c8708a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.0173a09b.js"
+    "static/js/main.4b3c1ebe.js"
   ]
 }
